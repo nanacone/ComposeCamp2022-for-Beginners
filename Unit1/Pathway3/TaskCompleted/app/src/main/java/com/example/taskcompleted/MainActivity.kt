@@ -22,15 +22,51 @@ import com.example.taskcompleted.ui.theme.TaskCompletedTheme
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContent { }
+        setContent {
+            TaskCompletedTheme {
+                Surface(
+                    modifier = Modifier.fillMaxSize()
+                    , color = MaterialTheme.colors.background
+                ) {
+                    TaskCompletedScreen()
+
+                }
+            }
+        }
     }
 }
 
 @Composable
 fun TaskCompletedScreen() {
-    Column( ) { }
+    val image = painterResource(id = R.drawable.ic_task_completed)
+    Column(
+        modifier = Modifier
+            .fillMaxHeight()
+            .wrapContentHeight(Alignment.CenterVertically)) {
+        Image(painter = image
+            , contentDescription = null
+            , modifier = Modifier.fillMaxWidth()
+                .wrapContentWidth(Alignment.CenterHorizontally)
+        )
+        Text(text = stringResource(id = R.string.all_task_completed)
+            , fontSize = 24.sp
+            , modifier = Modifier
+                .padding(top = 24.dp, bottom = 8.dp)
+                .align(Alignment.CenterHorizontally)
+        )
+        Text(text = stringResource(id = R.string.nice_work)
+            , fontSize = 16.sp
+            , modifier = Modifier
+                .align(Alignment.CenterHorizontally)
+        )
+
+    }
 }
 
 @Preview(showBackground = true)
 @Composable
-fun DefaultPreview() { }
+fun TaskCompletedPreview() {
+    TaskCompletedTheme {
+        TaskCompletedScreen()
+    }
+}
