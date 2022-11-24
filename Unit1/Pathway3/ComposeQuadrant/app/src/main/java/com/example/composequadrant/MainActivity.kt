@@ -22,15 +22,54 @@ import com.example.composequadrant.ui.theme.ComposeQuadrantTheme
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContent { }
+        setContent {
+            ComposeQuadrantTheme {
+                Surface(modifier = Modifier.fillMaxSize()
+                        , color = MaterialTheme.colors.background
+                ) {
+                    ComposeQuadrantApp()
+                }
+            }
+        }
     }
 }
 
 @Composable
 fun ComposeQuadrantApp() {
+
     Column() {
-        Row() { }
-        Row() { }
+        Row(modifier = Modifier.weight(1F, false)) {
+            ComposableInfoCard(title = stringResource(id = R.string.first_title)
+                , description = stringResource(id = R.string.first_description)
+                , backgroundColor = Color.Green, modifier = Modifier.weight(1F))
+            ComposableInfoCard(title = stringResource(id = R.string.second_title)
+                , description = stringResource(id = R.string.second_description)
+                , backgroundColor = Color.Yellow, modifier = Modifier.weight(1F))
+//            Box(modifier = Modifier
+//                .fillMaxSize()
+//                .background(Color.Green)
+//                .weight(1F)
+//                .padding(16.dp)) {
+//
+//
+//
+//            }
+//            Box(modifier = Modifier
+//                .fillMaxSize()
+//                .background(Color.Yellow)
+//                .weight(1F, true)
+//                .padding(16.dp)) {
+//
+//            }
+        }
+        Row(modifier = Modifier.weight(1F, true)) {
+            ComposableInfoCard(title = stringResource(id = R.string.third_title)
+                , description = stringResource(id = R.string.third_description)
+                , backgroundColor = Color.Cyan, modifier = Modifier.weight(1F))
+            ComposableInfoCard(title = stringResource(id = R.string.fourth_title)
+                , description = stringResource(id = R.string.fourth_description)
+                , backgroundColor = Color.LightGray, modifier = Modifier.weight(1F))
+        }
     }
 }
 
@@ -41,10 +80,29 @@ private fun ComposableInfoCard(
     backgroundColor: Color,
     modifier: Modifier = Modifier
 ) {
-    Column( ) { }
+    Column(modifier =
+        modifier
+            .fillMaxSize()
+            .background(backgroundColor)
+            .padding(16.dp),
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.Center) {
+
+        Text(text = title
+            , fontWeight = FontWeight.Bold
+            , textAlign = TextAlign.Center)
+
+        Text(text = description
+            , textAlign = TextAlign.Justify
+        )
+    }
 }
 
 
 @Preview(showBackground = true)
 @Composable
-fun DefaultPreview() { }
+fun ComposeQuadrantPreview() {
+    ComposeQuadrantTheme {
+        ComposeQuadrantApp()
+    }
+}
